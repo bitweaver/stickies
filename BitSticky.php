@@ -1,4 +1,9 @@
 <?php
+/**
+ * @package	stickies
+ * @author	spider <spider@steelsun.com>
+ */
+
 // +----------------------------------------------------------------------+
 // | Copyright (c) 2004, bitweaver.org
 // +----------------------------------------------------------------------+
@@ -11,12 +16,19 @@
 // | Authors: spider <spider@steelsun.com>
 // +----------------------------------------------------------------------+
 //
-// $Id: BitSticky.php,v 1.1 2005/06/19 05:06:30 bitweaver Exp $
+// $Id: BitSticky.php,v 1.2 2005/06/28 07:46:00 spiderr Exp $
 
+/**
+ * required setup
+ */
 require_once( LIBERTY_PKG_PATH.'LibertyAttachable.php' );
 
 define('TIKISTICKY_CONTENT_TYPE_GUID', 'tikisticky' );
 
+/**
+ * @package	stickies
+ * @subpackage BitSticky
+ */
 class BitSticky extends LibertyAttachable {
 
 	function BitSticky( $pStickyId=NULL, $pContentId=NULL, $pNotatedContentId=NULL ) {
