@@ -18,7 +18,7 @@
 							{formfeedback warning=$warning}
 							{formlabel label="Title" for="title"}
 							{forminput}
-								<input type="text" size="60" name="title" value="{$stickyInfo.title|escape}" id="title" />
+								<input type="text" size="50" name="title" value="{$stickyInfo.title|escape}" id="title" />
 							{/forminput}
 						</div>
 
