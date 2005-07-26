@@ -29,9 +29,9 @@ require_once( LIBERTY_PKG_PATH.'lookup_content_inc.php' );
 if( !$gContent->isvalid() && !empty( $_REQUEST['notated_content_id'] ) ) {
 	if( $viewContent = $gContent->getLibertyObject( $_REQUEST['notated_content_id'] ) ) {
 		$viewContent->load();
-		$smarty->assign_by_ref( 'pageInfo', $viewContent->mInfo );
+		$gBitSmarty->assign_by_ref( 'pageInfo', $viewContent->mInfo );
 		$gContent = &$viewContent;
-		$smarty->assign_by_ref( 'gContent', $gContent );
+		$gBitSmarty->assign_by_ref( 'gContent', $gContent );
 	}
 }
 
@@ -66,9 +66,9 @@ if( !empty( $_REQUEST['save_sticky'] ) ) {
 }
 
 // WYSIWYG and Quicktag variable
-$smarty->assign( 'textarea_id', 'editsticky' );
+$gBitSmarty->assign( 'textarea_id', 'editsticky' );
 
-$smarty->assign_by_ref( 'stickyInfo', $gSticky->mInfo );
+$gBitSmarty->assign_by_ref( 'stickyInfo', $gSticky->mInfo );
 
 $gBitSystem->display( 'bitpackage:stickies/edit_sticky.tpl', 'Edit Sticky Note for '.$gContent->getTitle() );
 
