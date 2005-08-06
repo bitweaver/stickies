@@ -16,7 +16,7 @@
 // | Authors: spider <spider@steelsun.com>
 // +----------------------------------------------------------------------+
 //
-// $Id: BitSticky.php,v 1.1.1.1.2.1 2005/06/27 15:10:26 lsces Exp $
+// $Id: BitSticky.php,v 1.1.1.1.2.2 2005/08/06 18:31:11 lsces Exp $
 
 /**
  * required setup
@@ -98,7 +98,7 @@ class BitSticky extends LibertyAttachable {
 	}	
 	
 	function store( &$pParamHash ) {
-		$this->mDb->StartTrans();
+		$this->StartTrans();
 		if( $this->verify( $pParamHash ) && LibertyAttachable::store( $pParamHash ) ) {
             if( $this->mStickyId ) {
 				$stickyId = array ( "name" => "sticky_id", "value" => $this->mStickyId );
@@ -114,9 +114,9 @@ class BitSticky extends LibertyAttachable {
 
 				$result = $this->associateInsert( BIT_DB_PREFIX."tiki_stickies", $pParamHash['sticky_store'] );
 			}
-			$this->mDb->CompleteTrans();
+			$this->CompleteTrans();
 		} else {
-			$this->mDb->RollbackTrans();
+			$this->RollbackTrans();
 		}
 
 		return( count( $this->mErrors ) == 0 );
@@ -125,12 +125,12 @@ class BitSticky extends LibertyAttachable {
 	function expunge() {
 		$ret = FALSE;
 		if( $this->isValid() ) {
-			$this->mDb->StartTrans();
+			$this->StartTrans();
 			$query = "DELETE FROM `".BIT_DB_PREFIX."tiki_stickies` WHERE `content_id` = ?";
 			$result = $this->query( $query, array( $this->mContentId ) );
 			if( LibertyAttachable::expunge() ) {
 				$ret = TRUE;
-				$this->mDb->CompleteTrans();
+				$this->CompleteTrans();
 			} else {
 				$this->mDb->RollbackTrans();
 			}
