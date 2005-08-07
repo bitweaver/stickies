@@ -16,7 +16,7 @@
 // | Authors: spider <spider@steelsun.com>
 // +----------------------------------------------------------------------+
 //
-// $Id: BitSticky.php,v 1.2 2005/06/28 07:46:00 spiderr Exp $
+// $Id: BitSticky.php,v 1.3 2005/08/07 17:46:45 squareing Exp $
 
 /**
  * required setup
@@ -65,7 +65,7 @@ class BitSticky extends LibertyAttachable {
 						FROM `".BIT_DB_PREFIX."tiki_stickies` tn 
 						INNER JOIN `".BIT_DB_PREFIX."tiki_content` tc ON (tc.`content_id` = tn.`content_id`) 
 						WHERE $whereSql";
-			$result = $this->query( $query, $bindVars );
+			$result = $this->mDb->query( $query, $bindVars );
 
 			if ( $result && $result->numRows() ) {
 				$this->mInfo = $result->fields;
@@ -91,7 +91,7 @@ class BitSticky extends LibertyAttachable {
 			$query = "SELECT tn.`sticky_id` FROM `".BIT_DB_PREFIX."tiki_stickies` tn 
 						INNER JOIN `".BIT_DB_PREFIX."tiki_content` tc ON( tn.`content_id`=tc.`content_id` )
 					  WHERE tc.`user_id`=? AND tn.`notated_content_id`=?";
-			$this->mStickyId = $this->getOne( $query, array( $gBitUser->mUserId, $pParamHash['notated_content_id'] ) );
+			$this->mStickyId = $this->mDb->getOne( $query, array( $gBitUser->mUserId, $pParamHash['notated_content_id'] ) );
 			$pParamHash['sticky_store']['notated_content_id'] = $pParamHash['notated_content_id'];
 		}
 		return( count( $this->mErrors ) == 0 );
@@ -102,17 +102,17 @@ class BitSticky extends LibertyAttachable {
 		if( $this->verify( $pParamHash ) && LibertyAttachable::store( $pParamHash ) ) {
             if( $this->mStickyId ) {
 				$stickyId = array ( "name" => "sticky_id", "value" => $this->mStickyId );
-				$result = $this->associateUpdate( BIT_DB_PREFIX."tiki_stickies", $pParamHash['sticky_store'], $stickyId );
+				$result = $this->mDb->associateUpdate( BIT_DB_PREFIX."tiki_stickies", $pParamHash['sticky_store'], $stickyId );
 			} else {
 				$pParamHash['sticky_store']['content_id'] = $pParamHash['content_id'];
 				if( isset( $pParamHash['page_id'] ) && is_numeric( $pParamHash['sticky_id'] ) ) {
 					$pParamHash['sticky_store']['sticky_id'] = $pParamHash['sticky_id'];
 				} else {
-					$pParamHash['sticky_store']['sticky_id'] = $this->GenID( 'tiki_stickies_sticky_id_seq');
+					$pParamHash['sticky_store']['sticky_id'] = $this->mDb->GenID( 'tiki_stickies_sticky_id_seq');
 				}
 				$this->mPageId = $pParamHash['sticky_store']['sticky_id'];
 
-				$result = $this->associateInsert( BIT_DB_PREFIX."tiki_stickies", $pParamHash['sticky_store'] );
+				$result = $this->mDb->associateInsert( BIT_DB_PREFIX."tiki_stickies", $pParamHash['sticky_store'] );
 			}
 			$this->mDb->CompleteTrans();
 		} else {
@@ -127,7 +127,7 @@ class BitSticky extends LibertyAttachable {
 		if( $this->isValid() ) {
 			$this->mDb->StartTrans();
 			$query = "DELETE FROM `".BIT_DB_PREFIX."tiki_stickies` WHERE `content_id` = ?";
-			$result = $this->query( $query, array( $this->mContentId ) );
+			$result = $this->mDb->query( $query, array( $this->mContentId ) );
 			if( LibertyAttachable::expunge() ) {
 				$ret = TRUE;
 				$this->mDb->CompleteTrans();
