@@ -28,7 +28,6 @@ require_once( WIKI_PKG_PATH.'lookup_page_inc.php' );
 require_once( LIBERTY_PKG_PATH.'lookup_content_inc.php' );
 if( !$gContent->isvalid() && !empty( $_REQUEST['notated_content_id'] ) ) {
 	if( $viewContent = $gContent->getLibertyObject( $_REQUEST['notated_content_id'] ) ) {
-		$viewContent->load();
 		$gBitSmarty->assign_by_ref( 'pageInfo', $viewContent->mInfo );
 		$gContent = &$viewContent;
 		$gBitSmarty->assign_by_ref( 'gContent', $gContent );
