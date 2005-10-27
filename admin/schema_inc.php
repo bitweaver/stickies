@@ -4,11 +4,11 @@
 $tables = array(
 
 'tiki_stickies' => "
-  sticky_id I4 PRIMARY,
-  content_id I4 NOTNULL,
-  notated_content_id I4 NOTNULL
-  CONSTRAINTS	', CONSTRAINT `tiki_stickies_content_ref` FOREIGN KEY (`content_id`) REFERENCES `".BIT_DB_PREFIX."tiki_content` (`content_id`)'
-  CONSTRAINTS	', CONSTRAINT `tiki_stickies_notated_ref` FOREIGN KEY (`notated_content_id`) REFERENCES `".BIT_DB_PREFIX."tiki_content` (`content_id`)'
+	sticky_id I4 PRIMARY,
+	content_id I4 NOTNULL,
+	notated_content_id I4 NOTNULL
+		CONSTRAINTS	', CONSTRAINT `tiki_stickies_content_ref` FOREIGN KEY (`content_id`) REFERENCES `".BIT_DB_PREFIX."tiki_content` (`content_id`)'
+		CONSTRAINTS	', CONSTRAINT `tiki_stickies_notated_ref` FOREIGN KEY (`notated_content_id`) REFERENCES `".BIT_DB_PREFIX."tiki_content` (`content_id`)'
 "
 
 );
