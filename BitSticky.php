@@ -16,7 +16,7 @@
 // | Authors: spider <spider@steelsun.com>
 // +----------------------------------------------------------------------+
 //
-// $Id: BitSticky.php,v 1.4 2005/08/24 20:58:14 squareing Exp $
+// $Id: BitSticky.php,v 1.5 2005/12/26 12:26:17 squareing Exp $
 
 /**
  * required setup
@@ -58,15 +58,15 @@ class BitSticky extends LibertyContent {
 	 * @return integer count of number of fields in MInfo
 	 */
 	function load() {
-		if( !empty( $this->mStickyId ) || !empty( $this->mContentId )  || !empty( $this->mNotatedContentId ) ) {
-			if( !empty( $this->mStickyId ) ) {
+		if( @BitBase::verifyId( $this->mStickyId ) || @BitBase::verifyId( $this->mContentId )  || @BitBase::verifyId( $this->mNotatedContentId ) ) {
+			if( @BitBase::verifyId( $this->mStickyId ) ) {
 				$whereSql = 'tn.`sticky_id`=?';
 				$bindVars = array( $this->mStickyId );
-			} elseif( !empty( $this->mNotatedContentId ) ) {
+			} elseif( @BitBase::verifyId( $this->mNotatedContentId ) ) {
 				global $gBitUser;
 				$whereSql = 'tn.`notated_content_id`=? AND tc.`user_id`=?';
 				$bindVars = array( $this->mNotatedContentId, $gBitUser->mUserId );
-			} elseif( !empty( $this->mContentId ) ) {
+			} elseif( @BitBase::verifyId( $this->mContentId ) ) {
 				$whereSql = 'tn.`content_id`=?';
 				$bindVars = array( $this->mContentId );
 			}
@@ -105,11 +105,11 @@ class BitSticky extends LibertyContent {
 	 */
 	function verify( &$pParamHash ) {
 		// It is possible a derived class set this to something different
-		if( empty( $pParamHash['content_type_guid'] ) ) {
+		if( !@BitBase::verifyId( $pParamHash['content_type_guid'] ) ) {
 			$pParamHash['content_type_guid'] = $this->mContentTypeGuid;
 		}
 
-		if( empty( $pParamHash['notated_content_id'] ) ) {
+		if( !@BitBase::verifyId( $pParamHash['notated_content_id'] ) ) {
 			$this->mErrors['content'] = "No content to notate";
 		} else {
 			global $gBitUser;
@@ -137,7 +137,7 @@ class BitSticky extends LibertyContent {
 					$result = $this->mDb->associateUpdate( BIT_DB_PREFIX."tiki_stickies", $pParamHash['sticky_store'], $stickyId );
 				} else {
 					$pParamHash['sticky_store']['content_id'] = $pParamHash['content_id'];
-					if( isset( $pParamHash['page_id'] ) && is_numeric( $pParamHash['sticky_id'] ) ) {
+					if( @BitBase::verifyId( $pParamHash['sticky_id'] ) ) {
 						$pParamHash['sticky_store']['sticky_id'] = $pParamHash['sticky_id'];
 					} else {
 						$pParamHash['sticky_store']['sticky_id'] = $this->mDb->GenID( 'tiki_stickies_sticky_id_seq');
