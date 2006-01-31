@@ -16,7 +16,7 @@
 // | Authors: spider <spider@steelsun.com>
 // +----------------------------------------------------------------------+
 //
-// $Id: BitSticky.php,v 1.5 2005/12/26 12:26:17 squareing Exp $
+// $Id: BitSticky.php,v 1.6 2006/01/31 20:21:00 bitweaver Exp $
 
 /**
  * required setup
@@ -71,7 +71,7 @@ class BitSticky extends LibertyContent {
 				$bindVars = array( $this->mContentId );
 			}
 			$query =   "SELECT tn.*, tc.*
-						FROM `".BIT_DB_PREFIX."tiki_stickies` tn 
+						FROM `".BIT_DB_PREFIX."stickies` tn 
 						INNER JOIN `".BIT_DB_PREFIX."tiki_content` tc ON (tc.`content_id` = tn.`content_id`) 
 						WHERE $whereSql";
 			$result = $this->mDb->query( $query, $bindVars );
@@ -97,7 +97,7 @@ class BitSticky extends LibertyContent {
 	 *
 	 * content_type_guid	string	Should contain 'tikisticky'
 	 * notated_content_id	integer	content_id of the object to which the stickie isattached
-	 * sticky_store - Array of values for entering in tiki_stickies
+	 * sticky_store - Array of values for entering in stickies
 	 *		sticky_id			integer		If existing then current sticky id
 	 *										otherwise populate from sequence
 	 *		content_id			integer		Content id of the note
@@ -113,7 +113,7 @@ class BitSticky extends LibertyContent {
 			$this->mErrors['content'] = "No content to notate";
 		} else {
 			global $gBitUser;
-			$query = "SELECT tn.`sticky_id` FROM `".BIT_DB_PREFIX."tiki_stickies` tn 
+			$query = "SELECT tn.`sticky_id` FROM `".BIT_DB_PREFIX."stickies` tn 
 						INNER JOIN `".BIT_DB_PREFIX."tiki_content` tc ON( tn.`content_id`=tc.`content_id` )
 					  WHERE tc.`user_id`=? AND tn.`notated_content_id`=?";
 			$this->mStickyId = $this->mDb->getOne( $query, array( $gBitUser->mUserId, $pParamHash['notated_content_id'] ) );
@@ -134,7 +134,7 @@ class BitSticky extends LibertyContent {
 			if( LibertyContent::store( $pParamHash ) ) {
             	if( $this->mStickyId ) {
 					$stickyId = array ( "name" => "sticky_id", "value" => $this->mStickyId );
-					$result = $this->mDb->associateUpdate( BIT_DB_PREFIX."tiki_stickies", $pParamHash['sticky_store'], $stickyId );
+					$result = $this->mDb->associateUpdate( BIT_DB_PREFIX."stickies", $pParamHash['sticky_store'], $stickyId );
 				} else {
 					$pParamHash['sticky_store']['content_id'] = $pParamHash['content_id'];
 					if( @BitBase::verifyId( $pParamHash['sticky_id'] ) ) {
@@ -144,7 +144,7 @@ class BitSticky extends LibertyContent {
 					}
 					$this->mPageId = $pParamHash['sticky_store']['sticky_id'];
 
-					$result = $this->mDb->associateInsert( BIT_DB_PREFIX."tiki_stickies", $pParamHash['sticky_store'] );
+					$result = $this->mDb->associateInsert( BIT_DB_PREFIX."stickies", $pParamHash['sticky_store'] );
 				}
 				$this->mDb->CompleteTrans();
 			} else {
@@ -162,7 +162,7 @@ class BitSticky extends LibertyContent {
 		$ret = FALSE;
 		if( $this->isValid() ) {
 			$this->mDb->StartTrans();
-			$query = "DELETE FROM `".BIT_DB_PREFIX."tiki_stickies` WHERE `content_id` = ?";
+			$query = "DELETE FROM `".BIT_DB_PREFIX."stickies` WHERE `content_id` = ?";
 			$result = $this->mDb->query( $query, array( $this->mContentId ) );
 			if( LibertyContent::expunge() ) {
 				$ret = TRUE;
