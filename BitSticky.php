@@ -16,7 +16,7 @@
 // | Authors: spider <spider@steelsun.com>
 // +----------------------------------------------------------------------+
 //
-// $Id: BitSticky.php,v 1.6 2006/01/31 20:21:00 bitweaver Exp $
+// $Id: BitSticky.php,v 1.7 2006/02/01 18:43:26 squareing Exp $
 
 /**
  * required setup
@@ -64,15 +64,15 @@ class BitSticky extends LibertyContent {
 				$bindVars = array( $this->mStickyId );
 			} elseif( @BitBase::verifyId( $this->mNotatedContentId ) ) {
 				global $gBitUser;
-				$whereSql = 'tn.`notated_content_id`=? AND tc.`user_id`=?';
+				$whereSql = 'tn.`notated_content_id`=? AND lc.`user_id`=?';
 				$bindVars = array( $this->mNotatedContentId, $gBitUser->mUserId );
 			} elseif( @BitBase::verifyId( $this->mContentId ) ) {
 				$whereSql = 'tn.`content_id`=?';
 				$bindVars = array( $this->mContentId );
 			}
-			$query =   "SELECT tn.*, tc.*
+			$query =   "SELECT tn.*, lc.*
 						FROM `".BIT_DB_PREFIX."stickies` tn 
-						INNER JOIN `".BIT_DB_PREFIX."tiki_content` tc ON (tc.`content_id` = tn.`content_id`) 
+						INNER JOIN `".BIT_DB_PREFIX."liberty_content` lc ON (lc.`content_id` = tn.`content_id`) 
 						WHERE $whereSql";
 			$result = $this->mDb->query( $query, $bindVars );
 
@@ -88,12 +88,12 @@ class BitSticky extends LibertyContent {
 	}
 	
     /**
-     * Verify the core class data required to update the tiki_content table entries
+     * Verify the core class data required to update the liberty_content table entries
 	 *
 	 * @param array Array of content data to be stored 
 	 * pParamHash Array 
 	 * (See LibertyContent::verify for details of the core fields - which
-	 * appends a [content_store] array with all the values for tiki_content)
+	 * appends a [content_store] array with all the values for liberty_content)
 	 *
 	 * content_type_guid	string	Should contain 'tikisticky'
 	 * notated_content_id	integer	content_id of the object to which the stickie isattached
@@ -114,8 +114,8 @@ class BitSticky extends LibertyContent {
 		} else {
 			global $gBitUser;
 			$query = "SELECT tn.`sticky_id` FROM `".BIT_DB_PREFIX."stickies` tn 
-						INNER JOIN `".BIT_DB_PREFIX."tiki_content` tc ON( tn.`content_id`=tc.`content_id` )
-					  WHERE tc.`user_id`=? AND tn.`notated_content_id`=?";
+						INNER JOIN `".BIT_DB_PREFIX."liberty_content` lc ON( tn.`content_id`=lc.`content_id` )
+					  WHERE lc.`user_id`=? AND tn.`notated_content_id`=?";
 			$this->mStickyId = $this->mDb->getOne( $query, array( $gBitUser->mUserId, $pParamHash['notated_content_id'] ) );
 			$pParamHash['sticky_store']['notated_content_id'] = $pParamHash['notated_content_id'];
 		}
