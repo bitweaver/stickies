@@ -29,8 +29,8 @@ $gBitInstaller->registerPackageInfo( STICKIES_PKG_NAME, array(
 
 // ### Indexes
 $indices = array (
-	'tiki_stickies_content_id_idx' => array( 'table' => 'stickies', 'cols' => 'content_id', 'opts' => NULL ),
-	'tiki_notated_content_id_idx' => array( 'table' => 'stickies', 'cols' => 'notated_content_id', 'opts' => NULL )
+	'stickies_content_id_idx' => array( 'table' => 'stickies', 'cols' => 'content_id', 'opts' => NULL ),
+	'notated_content_id_idx' => array( 'table' => 'stickies', 'cols' => 'notated_content_id', 'opts' => NULL )
 );
 // TODO - SPIDERR - following seems to cause time _decrease_ cause bigint on postgres. need more investigation
 //	'blog_posts_created_idx' => array( 'table' => 'blog_posts', 'cols' => 'created', 'opts' => NULL ),
