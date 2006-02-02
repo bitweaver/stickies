@@ -38,7 +38,7 @@ $gBitInstaller->registerSchemaIndexes( STICKIES_PKG_NAME, $indices );
 
 // ### Sequences
 $sequences = array (
-	'tiki_stickies_sticky_id_seq' => array( 'start' => 1 ) 
+	'stickies_sticky_id_seq' => array( 'start' => 1 ) 
 );
 $gBitInstaller->registerSchemaSequences( STICKIES_PKG_NAME, $sequences );
 

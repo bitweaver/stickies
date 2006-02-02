@@ -16,7 +16,7 @@
 // | Authors: spider <spider@steelsun.com>
 // +----------------------------------------------------------------------+
 //
-// $Id: BitSticky.php,v 1.7 2006/02/01 18:43:26 squareing Exp $
+// $Id: BitSticky.php,v 1.8 2006/02/02 07:55:24 squareing Exp $
 
 /**
  * required setup
@@ -140,7 +140,7 @@ class BitSticky extends LibertyContent {
 					if( @BitBase::verifyId( $pParamHash['sticky_id'] ) ) {
 						$pParamHash['sticky_store']['sticky_id'] = $pParamHash['sticky_id'];
 					} else {
-						$pParamHash['sticky_store']['sticky_id'] = $this->mDb->GenID( 'tiki_stickies_sticky_id_seq');
+						$pParamHash['sticky_store']['sticky_id'] = $this->mDb->GenID( 'stickies_sticky_id_seq');
 					}
 					$this->mPageId = $pParamHash['sticky_store']['sticky_id'];
 
