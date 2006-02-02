@@ -7,8 +7,8 @@ $tables = array(
 	sticky_id I4 PRIMARY,
 	content_id I4 NOTNULL,
 	notated_content_id I4 NOTNULL
-		CONSTRAINTS	', CONSTRAINT `tiki_stickies_content_ref` FOREIGN KEY (`content_id`) REFERENCES `".BIT_DB_PREFIX."liberty_content` (`content_id`)'
-		CONSTRAINTS	', CONSTRAINT `tiki_stickies_notated_ref` FOREIGN KEY (`notated_content_id`) REFERENCES `".BIT_DB_PREFIX."liberty_content` (`content_id`)'
+		CONSTRAINTS	', CONSTRAINT `stickies_content_ref` FOREIGN KEY (`content_id`) REFERENCES `".BIT_DB_PREFIX."liberty_content` (`content_id`)'
+		CONSTRAINTS	', CONSTRAINT `stickies_notated_ref` FOREIGN KEY (`notated_content_id`) REFERENCES `".BIT_DB_PREFIX."liberty_content` (`content_id`)'
 "
 
 );
