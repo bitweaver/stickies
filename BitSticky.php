@@ -16,7 +16,7 @@
 // | Authors: spider <spider@steelsun.com>
 // +----------------------------------------------------------------------+
 //
-// $Id: BitSticky.php,v 1.8 2006/02/02 07:55:24 squareing Exp $
+// $Id: BitSticky.php,v 1.9 2006/02/08 23:24:28 spiderr Exp $
 
 /**
  * required setup
@@ -133,8 +133,7 @@ class BitSticky extends LibertyContent {
 			$this->mDb->StartTrans();
 			if( LibertyContent::store( $pParamHash ) ) {
             	if( $this->mStickyId ) {
-					$stickyId = array ( "name" => "sticky_id", "value" => $this->mStickyId );
-					$result = $this->mDb->associateUpdate( BIT_DB_PREFIX."stickies", $pParamHash['sticky_store'], $stickyId );
+					$result = $this->mDb->associateUpdate( BIT_DB_PREFIX."stickies", $pParamHash['sticky_store'], array( "sticky_id" => $this->mStickyId ) );
 				} else {
 					$pParamHash['sticky_store']['content_id'] = $pParamHash['content_id'];
 					if( @BitBase::verifyId( $pParamHash['sticky_id'] ) ) {
