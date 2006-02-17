@@ -1,5 +1,9 @@
 <?php
 global $gBitSystem, $gBitSmarty;
-$gBitSystem->registerPackage( 'stickies', dirname( __FILE__).'/' );
 
+$registerHash = array(
+	'package_name' => 'stickies',
+	'package_path' => dirname( __FILE__ ).'/',
+);
+$gBitSystem->registerPackage( $registerHash );
 ?>
