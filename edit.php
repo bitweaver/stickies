@@ -65,7 +65,7 @@ if( !empty( $_REQUEST['save_sticky'] ) ) {
 }
 
 // WYSIWYG and Quicktag variable
-$gBitSmarty->assign( 'textarea_id', 'editsticky' );
+$gBitSmarty->assign( 'textarea_id', LIBERTY_TEXT_AREA );
 
 $gBitSmarty->assign_by_ref( 'stickyInfo', $gSticky->mInfo );
 
