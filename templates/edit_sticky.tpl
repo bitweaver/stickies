@@ -3,7 +3,7 @@
 
 <div class="admin stickies">
 	<div class="header">
-		<h1>{tr}Edit Sticky for {/tr}"{$pageInfo.title}"</h1>
+		<h1>{tr}Edit Sticky for {/tr}"{$pageInfo.title|escape}"</h1>
 	</div>
 
 	{formhelp note="Here you can add personal notes to this page. This information will only be visible to you when you are logged in to your account."}
