@@ -32,7 +32,7 @@
 
 						<div class="row">
 							{forminput}
-								<textarea id="{$textarea_id}" name="edit" rows="{$smarty.cookies.rows|default:40}" cols="50">{if !$preview}{$stickyInfo.data|escape:html}{else}{$edit|escape:html}{/if}</textarea>
+								<textarea {spellchecker} id="{$textarea_id}" name="edit" rows="{$smarty.cookies.rows|default:40}" cols="50">{if !$preview}{$stickyInfo.data|escape:html}{else}{$edit|escape:html}{/if}</textarea>
 							{/forminput}
 						</div>
 
