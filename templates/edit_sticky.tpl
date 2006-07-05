@@ -48,6 +48,6 @@
 				{/jstab}
 			{/jstabs}
 		{/form}
-	</div>
+	</div><!-- end .body -->
 </div>
 {/strip}
