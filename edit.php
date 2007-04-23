@@ -35,7 +35,7 @@ if( !$gContent->isvalid() && !empty( $_REQUEST['notated_content_id'] ) ) {
 }
 
 if( !$gContent->isvalid() ) {
-	$gBitSystem->fatalError( 'Unknown content to create sticky note' );
+	$gBitSystem->fatalError( tra( 'Unknown content to create sticky note' ));
 }
 
 $gSticky = new BitSticky( (isset( $_REQUEST['sticky_id'] ) ? $_REQUEST['sticky_id'] : ''), NULL, $gContent->mContentId );
