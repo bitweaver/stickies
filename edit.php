@@ -69,6 +69,6 @@ $gBitSmarty->assign( 'textarea_id', LIBERTY_TEXT_AREA );
 
 $gBitSmarty->assign_by_ref( 'stickyInfo', $gSticky->mInfo );
 
-$gBitSystem->display( 'bitpackage:stickies/edit_sticky.tpl', 'Edit Sticky Note for '.$gContent->getTitle() );
+$gBitSystem->display( 'bitpackage:stickies/edit_sticky.tpl', 'Edit Sticky Note for '.$gContent->getTitle() , array( 'display_mode' => 'edit' ));
 
 ?>
