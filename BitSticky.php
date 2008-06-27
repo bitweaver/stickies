@@ -16,7 +16,7 @@
 // | Authors: spider <spider@steelsun.com>
 // +----------------------------------------------------------------------+
 //
-// $Id: BitSticky.php,v 1.9 2006/02/08 23:24:28 spiderr Exp $
+// $Id: BitSticky.php,v 1.10 2008/06/27 10:56:58 squareing Exp $
 
 /**
  * required setup
@@ -31,7 +31,7 @@ define('TIKISTICKY_CONTENT_TYPE_GUID', 'tikisticky' );
 class BitSticky extends LibertyContent {
 
 	function BitSticky( $pStickyId=NULL, $pContentId=NULL, $pNotatedContentId=NULL ) {
-		LibertyAttachable::LibertyAttachable();
+		LibertyContent::LibertyContent();
 		$this->registerContentType( TIKISTICKY_CONTENT_TYPE_GUID, array(
 				'content_type_guid' => TIKISTICKY_CONTENT_TYPE_GUID,
 				'content_description' => 'Sticky',
