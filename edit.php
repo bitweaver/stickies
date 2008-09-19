@@ -57,10 +57,19 @@ if( !empty( $_REQUEST['save_sticky'] ) ) {
 			header( 'Location: '.$gContent->getDisplayUrl() );
 			die;
 		} else {
-			$gBitSystem->confirmDialog( $formHash, array( 'error'=> implode( $gContent->mErrors ), 'warning' => 'Are you sure you want to remove the sticky note "'.$gSticky->mInfo['title'].'" ?') );
+			$gBitSystem->confirmDialog( $formHash, 
+				array( 
+					'error'=> implode( $gContent->mErrors ), 
+					'warning' => tra('Are you sure you want to remove this sticky note?') . ' ' .$gSticky->mInfo['title'],
+				)
+			);
 		}
 	} else {
-		$gBitSystem->confirmDialog( $formHash, array( 'warning' => 'Are you sure you want to remove the sticky note "<b>'.$gSticky->mInfo['title'].'</b>" ?') );
+		$gBitSystem->confirmDialog( $formHash, 
+			array( 
+					'warning' => tra('Are you sure you want to remove this sticky note?') . ' ' .$gSticky->mInfo['title'],
+			)
+		);
 	}
 }
 
@@ -69,6 +78,6 @@ $gBitSmarty->assign( 'textarea_id', LIBERTY_TEXT_AREA );
 
 $gBitSmarty->assign_by_ref( 'stickyInfo', $gSticky->mInfo );
 
-$gBitSystem->display( 'bitpackage:stickies/edit_sticky.tpl', 'Edit Sticky Note for '.$gContent->getTitle() , array( 'display_mode' => 'edit' ));
+$gBitSystem->display( 'bitpackage:stickies/edit_sticky.tpl', tr('Edit Sticky Note for ').$gContent->getTitle() , array( 'display_mode' => 'edit' ));
 
 ?>
