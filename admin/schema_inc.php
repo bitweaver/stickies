@@ -41,7 +41,7 @@ $gBitInstaller->registerSchemaSequences( STICKIES_PKG_NAME, $sequences );
 
 // ### Default UserPermissions
 $gBitInstaller->registerUserPermissions( STICKIES_PKG_NAME, array(
-	array('p_stickies_edit', 'Can create stickies', 'registered', STICKIES_PKG_NAME),
+	array('p_stickies_create', 'Can create stickies', 'registered', STICKIES_PKG_NAME),
 	array('p_stickies_admin', 'Can admin stickies', 'editors', STICKIES_PKG_NAME)
 ) );
 

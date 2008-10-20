@@ -14,7 +14,7 @@ require_once( STICKIES_PKG_PATH.'BitSticky.php' );
 $gBitSystem->verifyPackage( 'stickies' );
 
 // Now check permissions to access this page
-$gBitSystem->verifyPermission( 'p_stickies_edit' );
+$gBitSystem->verifyPermission( 'p_stickies_create' );
 
 if( isset($_REQUEST["blog_id"]) ) {
 	$blog_id = $_REQUEST["blog_id"];
