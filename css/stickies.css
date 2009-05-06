@@ -1,0 +1,4 @@
+.stickies textarea,
+.stickies input[type='text']    {background:#ffc;}
+.stickynote h3                  {border-bottom: 1px solid #dda;}
+.stickynote                     {background-color:#ffc; width:300px; padding:3px;float:left;}
