@@ -16,7 +16,7 @@
 // | Authors: spider <spider@steelsun.com>
 // +----------------------------------------------------------------------+
 //
-// $Id: BitSticky.php,v 1.12 2009/10/01 14:17:05 wjames5 Exp $
+// $Id: BitSticky.php,v 1.13 2010/04/17 22:46:10 wjames5 Exp $
 
 /**
  * required setup
@@ -34,7 +34,8 @@ class BitSticky extends LibertyContent {
 		LibertyContent::LibertyContent();
 		$this->registerContentType( TIKISTICKY_CONTENT_TYPE_GUID, array(
 				'content_type_guid' => TIKISTICKY_CONTENT_TYPE_GUID,
-				'content_description' => 'Sticky',
+				'content_name' => 'Sticky',
+				'content_name_plural' => 'Stickies',
 				'handler_class' => 'BitSticky',
 				'handler_package' => 'stickies',
 				'handler_file' => 'BitSticky.php',
