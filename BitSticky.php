@@ -16,14 +16,14 @@
 // | Authors: spider <spider@steelsun.com>
 // +----------------------------------------------------------------------+
 //
-// $Id: BitSticky.php,v 1.13 2010/04/17 22:46:10 wjames5 Exp $
+// $Id: BitSticky.php,v 1.14 2010/04/25 11:20:10 lsces Exp $
 
 /**
  * required setup
  */
 require_once( LIBERTY_PKG_PATH.'LibertyContent.php' );
 
-define('TIKISTICKY_CONTENT_TYPE_GUID', 'tikisticky' );
+define('BITSTICKY_CONTENT_TYPE_GUID', 'bitsticky' );
 
 /**
  * @package	stickies
@@ -32,8 +32,8 @@ class BitSticky extends LibertyContent {
 
 	function BitSticky( $pStickyId=NULL, $pContentId=NULL, $pNotatedContentId=NULL ) {
 		LibertyContent::LibertyContent();
-		$this->registerContentType( TIKISTICKY_CONTENT_TYPE_GUID, array(
-				'content_type_guid' => TIKISTICKY_CONTENT_TYPE_GUID,
+		$this->registerContentType( BITSTICKY_CONTENT_TYPE_GUID, array(
+				'content_type_guid' => BITSTICKY_CONTENT_TYPE_GUID,
 				'content_name' => 'Sticky',
 				'content_name_plural' => 'Stickies',
 				'handler_class' => 'BitSticky',
@@ -44,7 +44,7 @@ class BitSticky extends LibertyContent {
 		$this->mStickyId = $pStickyId;
 		$this->mContentId = $pContentId;
 		$this->mNotatedContentId = $pNotatedContentId;
-		$this->mContentTypeGuid = TIKISTICKY_CONTENT_TYPE_GUID;
+		$this->mContentTypeGuid = BITSTICKY_CONTENT_TYPE_GUID;
 	}
 
 
@@ -81,6 +81,7 @@ class BitSticky extends LibertyContent {
 				$this->mInfo = $result->fields;
 				$this->mInfo['parsed'] = $this->parseData();
 				$this->mContentId = $result->fields['content_id'];
+				$this->mNotatedContentId = $result->fields['notated_content_id'];
 				$this->mStickyId = $result->fields['sticky_id'];
 				LibertyContent::load();
 			}
@@ -96,7 +97,7 @@ class BitSticky extends LibertyContent {
 	 * (See LibertyContent::verify for details of the core fields - which
 	 * appends a [content_store] array with all the values for liberty_content)
 	 *
-	 * content_type_guid	string	Should contain 'tikisticky'
+	 * content_type_guid	string	Should contain 'sticky'
 	 * notated_content_id	integer	content_id of the object to which the stickie isattached
 	 * sticky_store - Array of values for entering in stickies
 	 *		sticky_id			integer		If existing then current sticky id
@@ -171,6 +172,27 @@ class BitSticky extends LibertyContent {
 				$this->mDb->RollbackTrans();
 			}
 		}
+		return $ret;
+	}
+
+	/**
+	* Generates the URL to the content item to which sticky is attached
+	* @return the link to the full content item to which sticky is attached
+	*/
+	function getDisplayUrl( $pStickyId = NULL, $pParamHash = NULL ) {
+		global $gBitSystem;
+
+		$ret = NULL;
+		if( !@BitBase::verifyId( $pStickyId ) && $this->isValid() ) {
+			$pStickyId = $this->mStickyId;
+		}
+
+		if( @$this->verifyId( $this->mNotatedContentId ) ) {
+			$ret = LibertyContent::getDisplayUrl( $this->mNotatedContentId, $pParamHash );
+		} else {
+			$ret = LibertyContent::getDisplayUrl( NULL, $pParamHash );
+		}
+
 		return $ret;
 	}
 	
