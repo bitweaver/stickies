@@ -16,7 +16,7 @@
 // | Authors: spider <spider@steelsun.com>
 // +----------------------------------------------------------------------+
 //
-// $Id: BitSticky.php,v 1.14 2010/04/25 11:20:10 lsces Exp $
+// $Id$
 
 /**
  * required setup
