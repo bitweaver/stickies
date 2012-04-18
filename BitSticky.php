@@ -178,24 +178,21 @@ class BitSticky extends LibertyContent {
 	/**
 	* Generates the URL to the content item to which sticky is attached
 	* @return the link to the full content item to which sticky is attached
-	*/
-	function getDisplayUrl( $pStickyId = NULL, $pParamHash = NULL ) {
+	* /
+	function getDisplayUrlFromHash( $pParamHash = NULL ) {
 		global $gBitSystem;
 
 		$ret = NULL;
-		if( !@BitBase::verifyId( $pStickyId ) && $this->isValid() ) {
-			$pStickyId = $this->mStickyId;
-		}
 
 		if( @$this->verifyId( $this->mNotatedContentId ) ) {
-			$ret = LibertyContent::getDisplayUrl( $this->mNotatedContentId, $pParamHash );
+			$ret = LibertyContent::getDisplayUrlFromHash( $this->mNotatedContentId, $pParamHash );
 		} else {
-			$ret = LibertyContent::getDisplayUrl( NULL, $pParamHash );
+			$ret = LibertyContent::getDisplayUrlFromHash( NULL, $pParamHash );
 		}
 
 		return $ret;
 	}
-	
+	*/
 }
 
 ?>
