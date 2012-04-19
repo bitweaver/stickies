@@ -179,7 +179,7 @@ class BitSticky extends LibertyContent {
 	* Generates the URL to the content item to which sticky is attached
 	* @return the link to the full content item to which sticky is attached
 	* /
-	function getDisplayUrlFromHash( $pParamHash = NULL ) {
+	public static function getDisplayUrlFromHash( $pParamHash = NULL ) {
 		global $gBitSystem;
 
 		$ret = NULL;

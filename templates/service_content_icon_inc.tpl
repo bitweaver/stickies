@@ -4,5 +4,5 @@
 		{else}
 				{assign var='stickyRequest' value="notated_content_id=`$gContent->mInfo.content_id`"}
 		{/if}
-		<a href="{$smarty.const.STICKIES_PKG_URL}edit.php?{$stickyRequest}">{biticon ipackage=stickies iname="sticky_note" iexplain="Add sticky not
+		<a href="{$smarty.const.STICKIES_PKG_URL}edit.php?{$stickyRequest}">{biticon ipackage="stickies" iname="sticky_note" iexplain="Add sticky note"}
 {/if}
