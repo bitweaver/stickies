@@ -31,7 +31,7 @@ define('BITSTICKY_CONTENT_TYPE_GUID', 'bitsticky' );
 class BitSticky extends LibertyContent {
 
 	function BitSticky( $pStickyId=NULL, $pContentId=NULL, $pNotatedContentId=NULL ) {
-		LibertyContent::LibertyContent();
+		parent::__construct();
 		$this->registerContentType( BITSTICKY_CONTENT_TYPE_GUID, array(
 				'content_type_guid' => BITSTICKY_CONTENT_TYPE_GUID,
 				'content_name' => 'Sticky',
