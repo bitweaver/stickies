@@ -37,7 +37,7 @@
 						</div>
 
 						<div class="control-group submit">
-							<input type="submit" name="save_sticky" value="{tr}save{/tr}" />
+							<input type="submit" class="btn" name="save_sticky" value="{tr}save{/tr}" />
 						</div>
 					{/legend}
 				{/jstab}
