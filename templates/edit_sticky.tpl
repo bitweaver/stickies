@@ -14,7 +14,7 @@
 				{jstab title="Edit Sticky"}
 					{legend legend="Edit/Create Sticky Note"}
 						<input type="hidden" name="notated_content_id" value="{$stickyInfo.notated_content_id}" />
-						<div class="control-group">
+						<div class="form-group">
 							{formfeedback warning=$warning}
 							{formlabel label="Title" for="title"}
 							{forminput}
@@ -30,13 +30,13 @@
 							{include file="bitpackage:quicktags/quicktags_full.tpl"}
 						{/if}
 
-						<div class="control-group">
+						<div class="form-group">
 							{forminput}
 								<textarea {spellchecker} id="{$textarea_id}" name="edit" rows="{$smarty.cookies.rows|default:40}" cols="50">{if !$preview}{$stickyInfo.data|escape:html}{else}{$edit|escape:html}{/if}</textarea>
 							{/forminput}
 						</div>
 
-						<div class="control-group submit">
+						<div class="form-group submit">
 							<input type="submit" class="btn btn-default" name="save_sticky" value="{tr}save{/tr}" />
 						</div>
 					{/legend}
